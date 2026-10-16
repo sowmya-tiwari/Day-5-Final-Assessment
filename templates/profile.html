@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div>
+                <h1>Student Dashboard</h1>
+                <p>Welcome back, {{ student.name }}!</p>
+            </div>
+            <a class="button-link" href="{{ url_for('logout') }}">Logout</a>
+        </header>
+
+        <div class="card">
+            <h2>Dashboard Overview</h2>
+            <p>Current time: <strong id="clock"></strong></p>
+            <button type="button" id="toggleBtn">Show/Hide Details</button>
+
+            <div id="details" class="details">
+                <p><strong>Name:</strong> {{ student.name }}</p>
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>Age:</strong> {{ student.age }}</p>
+                <p><strong>Gender:</strong> {{ student.gender }}</p>
+                <p><strong>Course:</strong> <span id="currentCourse">{{ student.course }}</span></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Update Your Course</h2>
+            <label for="newCourse">Choose Course</label>
+            <select id="newCourse">
+                <option value="Computer Science"
+                    {% if student.course == 'Computer Science' %}selected{% endif %}>
+                    Computer Science
+                </option>
+                <option value="Data Science"
+                    {% if student.course == 'Data Science' %}selected{% endif %}>
+                    Data Science
+                </option>
+                <option value="Cloud Computing"
+                    {% if student.course == 'Cloud Computing' %}selected{% endif %}>
+                    Cloud Computing
+                </option>
+                <option value="Business Analytics"
+                    {% if student.course == 'Business Analytics' %}selected{% endif %}>
+                    Business Analytics
+                </option>
+            </select>
+            <p id="message" role="status"></p>
+        </div>
+    </div>
+</body>
+</html>
